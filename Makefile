@@ -6,63 +6,60 @@
 #    By: yufli <yufli@student.42barcelona.com>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/16 15:19:46 by yufli             #+#    #+#              #
-#    Updated: 2025/03/16 20:32:36 by yufli            ###   ########.fr        #
+#    Updated: 2025/05/18 23:48:01 by yufli            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME_CLIENT = client
-NAME_CLIENT_BONUS = client_bonus
-NAME_SERVER = server
-NAME_SERVER_BONUS = server_bonus
+# Compilador i flags
+CC      = cc
+CFLAGS  = -Wall -Wextra -Werror -Iincludes
 
-SRCDIR = sources
-BONUSDIR = sources_bonus
-INCDIR = includes
-LIBFTDIR = libft
+# Carpetes
+SRC_DIR     = sources
+BONUS_DIR   = sources_bonus
+LIBFT_DIR   = libft
 
-CLIENT_SRCS = $(SRCDIR)/client.c
-CLIENT_SRCS_BONUS = $(BONUSDIR)/client_bonus.c
-SERVER_SRCS = $(SRCDIR)/server.c
-SERVER_SRCS_BONUS = $(BONUSDIR)/server_bonus.c
+# Executables
+CLIENT      = client
+SERVER      = server
+CLIENT_B    = client_bonus
+SERVER_B    = server_bonus
 
-CLIENT_OBJS = $(CLIENT_SRCS:.c=.o)
-CLIENT_OBJS_BONUS = $(CLIENT_SRCS_BONUS:.c=.o)
-SERVER_OBJS = $(SERVER_SRCS:.c=.o)
-SERVER_OBJS_BONUS = $(SERVER_SRCS_BONUS:.c=.o)
+# Fitxers font
+SRC_FILES       = $(SRC_DIR)/client.c $(SRC_DIR)/server.c
+BONUS_FILES     = $(BONUS_DIR)/client_bonus.c $(BONUS_DIR)/server_bonus.c
+LIBFT_FILES     = $(wildcard $(LIBFT_DIR)/*.c)
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
-LIBFT = $(LIBFTDIR)/libft.a
+# Objectes
+OBJS_CLIENT     = $(SRC_DIR)/client.o $(LIBFT_FILES:.c=.o)
+OBJS_SERVER     = $(SRC_DIR)/server.o $(LIBFT_FILES:.c=.o)
+OBJS_CLIENT_B   = $(BONUS_DIR)/client_bonus.o $(LIBFT_FILES:.c=.o)
+OBJS_SERVER_B   = $(BONUS_DIR)/server_bonus.o $(LIBFT_FILES:.c=.o)
 
-all: $(LIBFT) $(NAME_CLIENT) $(NAME_SERVER)
+# Regles
+all: $(CLIENT) $(SERVER)
 
-$(LIBFT):
-	@make -C $(LIBFTDIR)
+$(CLIENT): $(OBJS_CLIENT)
+	$(CC) $(CFLAGS) -o $(CLIENT) $(OBJS_CLIENT)
 
-$(NAME_CLIENT): $(CLIENT_OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) -I $(INCDIR) $(CLIENT_OBJS) -L$(LIBFTDIR) -lft -o $(NAME_CLIENT)
+$(SERVER): $(OBJS_SERVER)
+	$(CC) $(CFLAGS) -o $(SERVER) $(OBJS_SERVER)
 
-$(NAME_CLIENT_BONUS): $(CLIENT_OBJS_BONUS) $(LIBFT)
-	$(CC) $(CFLAGS) -I $(INCDIR) $(CLIENT_OBJS_BONUS) -L$(LIBFTDIR) -lft -o $(NAME_CLIENT_BONUS)
+bonus: $(CLIENT_B) $(SERVER_B)
 
-$(NAME_SERVER): $(SERVER_OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) -I $(INCDIR) $(SERVER_OBJS) -L$(LIBFTDIR) -lft -o $(NAME_SERVER)
+$(CLIENT_B): $(OBJS_CLIENT_B)
+	$(CC) $(CFLAGS) -o $(CLIENT_B) $(OBJS_CLIENT_B)
 
-$(NAME_SERVER_BONUS): $(SERVER_OBJS_BONUS) $(LIBFT)
-	$(CC) $(CFLAGS) -I $(INCDIR) $(SERVER_OBJS_BONUS) -L$(LIBFTDIR) -lft -o $(NAME_SERVER_BONUS)
-
-%.o: %.c
-	$(CC) $(CFLAGS) -I $(INCDIR) -c $< -o $@
-
-bonus: $(LIBFT) $(NAME_CLIENT_BONUS) $(NAME_SERVER_BONUS)
+$(SERVER_B): $(OBJS_SERVER_B)
+	$(CC) $(CFLAGS) -o $(SERVER_B) $(OBJS_SERVER_B)
 
 clean:
-	rm -f $(CLIENT_OBJS) $(SERVER_OBJS) $(CLIENT_OBJS_BONUS) $(SERVER_OBJS_BONUS)
-	make -C $(LIBFTDIR) clean
+	@echo "Netegem objectes..."
+	rm -f $(SRC_DIR)/*.o $(BONUS_DIR)/*.o $(LIBFT_DIR)/*.o
 
 fclean: clean
-	rm -f $(NAME_CLIENT) $(NAME_SERVER) $(NAME_CLIENT_BONUS) $(NAME_SERVER_BONUS)
-	make -C $(LIBFTDIR) fclean
+	@echo "Esborrem executables..."
+	rm -f $(CLIENT) $(SERVER) $(CLIENT_B) $(SERVER_B)
 
 re: fclean all
 

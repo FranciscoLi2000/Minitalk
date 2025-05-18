@@ -6,11 +6,11 @@
 /*   By: yufli <yufli@student.42barcelona.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 17:41:25 by yufli             #+#    #+#             */
-/*   Updated: 2025/03/16 19:35:14 by yufli            ###   ########.fr       */
+/*   Updated: 2025/05/18 23:48:27 by yufli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minitalk.h"
+#include "minitalk.h"
 
 void	send_bit(int bit, pid_t server_pid)
 {

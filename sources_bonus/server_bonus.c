@@ -6,11 +6,11 @@
 /*   By: yufli <yufli@student.42barcelona.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 16:35:27 by yufli             #+#    #+#             */
-/*   Updated: 2025/03/16 20:53:10 by yufli            ###   ########.fr       */
+/*   Updated: 2025/05/18 23:49:09 by yufli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minitalk_bonus.h"
+#include "minitalk_bonus.h"
 
 volatile t_state	g_state = {0};
 

@@ -6,7 +6,7 @@
 /*   By: yufli <yufli@student.42barcelona.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 16:12:40 by yufli             #+#    #+#             */
-/*   Updated: 2025/03/16 20:33:37 by yufli            ###   ########.fr       */
+/*   Updated: 2025/05/18 23:52:56 by yufli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 # include <signal.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "../libft/libft.h"
+# include "libft.h"
+# include "ft_printf.h"
+# include "get_next_line.h"
 
 typedef struct state
 {

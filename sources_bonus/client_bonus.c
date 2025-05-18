@@ -6,11 +6,11 @@
 /*   By: yufli <yufli@student.42barcelona.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 16:08:02 by yufli             #+#    #+#             */
-/*   Updated: 2025/03/16 20:17:22 by yufli            ###   ########.fr       */
+/*   Updated: 2025/05/18 23:48:54 by yufli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minitalk_bonus.h"
+#include "minitalk_bonus.h"
 
 void	ack_handler(int sig, siginfo_t *info, void *context)
 {

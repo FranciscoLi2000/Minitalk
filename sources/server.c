@@ -6,11 +6,11 @@
 /*   By: yufli <yufli@student.42barcelona.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 18:48:38 by yufli             #+#    #+#             */
-/*   Updated: 2025/03/16 19:13:09 by yufli            ###   ########.fr       */
+/*   Updated: 2025/05/18 23:48:35 by yufli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minitalk.h"
+#include "minitalk.h"
 
 static t_server	g_data = {0};
 
