@@ -6,12 +6,10 @@
 /*   By: yufli <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:59:36 by yufli             #+#    #+#             */
-/*   Updated: 2024/12/31 20:06:18 by yufli            ###   ########.fr       */
+/*   Updated: 2025/06/04 00:06:26 by yufli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
 #include "libft.h"
 
 void	*ft_calloc(unsigned int nmemb, unsigned int size)

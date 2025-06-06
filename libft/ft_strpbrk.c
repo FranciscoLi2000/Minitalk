@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strpbrk.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yufli <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: yufli <yufli@student.42barcelona.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/27 15:43:43 by yufli             #+#    #+#             */
-/*   Updated: 2025/06/04 00:09:25 by yufli            ###   ########.fr       */
+/*   Created: 2025/06/04 00:58:19 by yufli             #+#    #+#             */
+/*   Updated: 2025/06/04 13:08:23 by yufli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dest, const void *src, unsigned int n)
+char	*ft_strpbrk(const char *s1, const char *s2)
 {
-	unsigned int	i;
+	int	i;
+	int	j;
 
-	if (dest == src)
-		return (dest);
 	i = 0;
-	while (i < n)
+	while (s1[i])
 	{
-		((char *)dest)[i] = ((const char *)src)[i];
+		j = 0;
+		while (s2[j])
+		{
+			if (s2[j] == s1[i])
+				return ((char *)&s1[i]);
+			j++;
+		}
 		i++;
 	}
-	return (dest);
+	return (NULL);
 }

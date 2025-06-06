@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strspn.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yufli <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: yufli <yufli@student.42barcelona.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/27 15:43:43 by yufli             #+#    #+#             */
-/*   Updated: 2025/06/04 00:09:25 by yufli            ###   ########.fr       */
+/*   Created: 2025/06/04 00:49:41 by yufli             #+#    #+#             */
+/*   Updated: 2025/06/04 00:57:08 by yufli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dest, const void *src, unsigned int n)
+size_t	ft_strspn(const char *s, const char *accept)
 {
-	unsigned int	i;
+	size_t	i;
+	size_t	j;
+	int		check;
 
-	if (dest == src)
-		return (dest);
+	check = 0;
 	i = 0;
-	while (i < n)
+	while (s[i])
 	{
-		((char *)dest)[i] = ((const char *)src)[i];
+		j = 0;
+		while (accept[j])
+		{
+			if (s[i] == accept[j])
+				check = 1;
+			j++;
+		}
+		if (check == 0)
+			return (i);
 		i++;
 	}
-	return (dest);
+	return (i);
 }

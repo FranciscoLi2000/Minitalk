@@ -6,99 +6,81 @@
 /*   By: yufli <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 11:37:00 by yufli             #+#    #+#             */
-/*   Updated: 2025/01/02 18:44:28 by yufli            ###   ########.fr       */
+/*   Updated: 2025/06/06 18:30:57 by yufli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
 #include "libft.h"
 
-char	**ft_split(char const *s, char c);
-
-static char	**allocate_substrings(char const *s, char c, int *count)
+static int	ft_word_count(const char *s, char c)
 {
-	char	**result;
-	int		i;
+	int	count;
+	int	in_word;
 
-	*count = 0;
-	i = 0;
-	while (s[i] != '\0')
+	count = 0;
+	in_word = 0;
+	while (*s)
 	{
-		while (s[i] == c)
-			i++;
-		if (s[i] != '\0')
+		if (*s != c && in_word == 0)
 		{
-			(*count)++;
-			while (s[i] != '\0' && s[i] != c)
-				i++;
+			in_word = 1;
+			count++;
 		}
+		else if (*s == c)
+			in_word = 0;
+		s++;
 	}
-	result = malloc((*count + 1) * sizeof(char *));
-	if (!result)
-		return (NULL);
-	return (result);
+	return (count);
 }
 
-static int	get_wordlen(const char *s, char c, int start)
+static void	ft_free_all(char **arr, int i)
 {
-	int	len;
-
-	len = 0;
-	while (s[start + len] != '\0' && s[start + len] != c)
-		len++;
-	return (len);
+	while (i >= 0)
+	{
+		free(arr[i]);
+		i--;
+	}
+	free(arr);
 }
 
-static int	store_substrings(char const *s, char c, char **result)
+static int	ft_fill_split(char **res, const char *s, char c)
 {
+	int	start;
+	int	end;
 	int	i;
-	int	j;
 
+	start = 0;
+	end = 0;
 	i = 0;
-	j = 0;
-	while (s[i] != '\0')
+	while (s[end])
 	{
-		while (s[i] == c)
-			i++;
-		if (s[i] != '\0')
+		if (s[end] == c)
+			start = end + 1;
+		else if (s[end + 1] == '\0' || s[end + 1] == c)
 		{
-			result[j] = ft_substr(s, i, get_wordlen(s, c, i));
-			if (!result[j])
-				return (j);
-			j++;
-			while (s[i] != '\0' && s[i] != c)
-				i++;
+			res[i] = ft_substr(s, start, end - start + 1);
+			if (!res[i])
+				return (ft_free_all(res, i - 1), 0);
+			i++;
 		}
+		end++;
 	}
-	result[j] = NULL;
-	return (-1);
-}
-
-static void	free_split_memory(char **result, int j)
-{
-	while (j >= 0)
-	{
-		free(result[j]);
-		j--;
-	}
-	free(result);
+	res[i] = NULL;
+	return (1);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**result;
-	int		failed_index;
-	int		count;
+	char	**res;
+	int			count;
 
-	result = allocate_substrings(s, c, &count);
-	if (!s || !result)
+	if (!s)
 		return (NULL);
-	failed_index = store_substrings(s, c, result);
-	if (failed_index != -1)
-	{
-		free_split_memory(result, failed_index - 1);
+	count = ft_word_count(s, c);
+	res = malloc((count + 1) * sizeof(char *));
+	if (!res)
 		return (NULL);
-	}
-	return (result);
+	if (!ft_fill_split(res, s, c))
+		return (NULL);
+	return (res);
 }

@@ -6,12 +6,10 @@
 /*   By: yufli <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 15:45:06 by yufli             #+#    #+#             */
-/*   Updated: 2024/12/31 18:29:10 by yufli            ###   ########.fr       */
+/*   Updated: 2025/06/04 00:39:14 by yufli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
 #include "libft.h"
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))

@@ -3,39 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yufli <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: yufli <yufli@student.42barcelona.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/28 17:25:33 by yufli             #+#    #+#             */
-/*   Updated: 2024/12/28 20:53:49 by yufli            ###   ########.fr       */
+/*   Created: 2025/06/04 00:37:00 by yufli             #+#    #+#             */
+/*   Updated: 2025/06/06 18:41:27 by yufli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
 #include "libft.h"
 
-char	*ft_strdup(const char *s)
+char	*ft_strdup(char *src)
 {
-	char	*dst;
-	int		i;
-	int		size;
-	int		len;
+	size_t	len;
+	size_t	i;
+	char	*dup;
 
-	len = 0;
-	while (s[len] != '\0')
-		len++;
-	if (s == 0)
-		return (0);
-	size = len + 1;
-	dst = malloc(size * sizeof(char));
-	if (dst == 0)
-		return (0);
+	len = ft_strlen(src);
+	dup = malloc(len + 1);
 	i = 0;
-	while (s[i] != '\0')
+	if (!dup)
+		return (NULL);
+	while (src[i])
 	{
-		dst[i] = s[i];
+		dup[i] = src[i];
 		i++;
 	}
-	dst[i] = '\0';
-	return (dst);
+	dup[i] = '\0';
+	return (dup);
 }

@@ -6,11 +6,10 @@
 /*   By: yufli <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 15:53:43 by yufli             #+#    #+#             */
-/*   Updated: 2024/12/31 19:57:03 by yufli            ###   ########.fr       */
+/*   Updated: 2025/06/04 00:09:44 by yufli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "libft.h"
 
 void	*ft_memmove(void *dest, const void *src, unsigned int n)

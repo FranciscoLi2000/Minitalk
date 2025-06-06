@@ -3,61 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yufli <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: yufli <yufli@student.42barcelona.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 17:48:53 by yufli             #+#    #+#             */
-/*   Updated: 2025/05/18 23:35:00 by yufli            ###   ########.fr       */
+/*   Created: 2025/06/06 20:08:51 by yufli             #+#    #+#             */
+/*   Updated: 2025/06/06 20:08:54 by yufli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_parse_specifier(t_print *tab, char spec)
+int	ft_handle_format(char type, va_list args)
 {
-	if (spec == 'c')
-		print_char(tab);
-	else if (spec == 's')
-		print_str(tab);
-	else if (spec == 'p')
-		print_ptr(tab);
-	else if (spec == 'd' || spec == 'i')
-		print_int(tab);
-	else if (spec == 'u')
-		print_uint(tab);
-	else if (spec == 'x')
-		print_hex(tab, 0);
-	else if (spec == 'X')
-		print_hex(tab, 1);
-	else if (spec == '%')
-		tab->tl += write(1, "%", 1);
-	else
-	{
-		tab->tl += write(1, "%", 1);
-		tab->tl += write(1, &spec, 1);
-	}
+	if (type == 'c')
+		return (ft_putchar(va_arg(args, int)));
+	else if (type == 's')
+		return (ft_putstr(va_arg(args, char *)));
+	else if (type == 'p')
+		return (ft_putptr(va_arg(args, unsigned long)));
+	else if (type == 'd' || type == 'i')
+		return (ft_putnbr(va_arg(args, int)));
+	else if (type == 'u')
+		return (ft_put_unsigned(va_arg(args, unsigned int)));
+	else if (type == 'x')
+		return (ft_put_hex(va_arg(args, unsigned int), 0));
+	else if (type == 'X')
+		return (ft_put_hex(va_arg(args, unsigned int), 1));
+	else if (type == '%')
+		return (ft_putchar('%'));
+	return (0);
 }
 
 int	ft_printf(const char *format, ...)
 {
-	t_print	tab;
+	va_list	args;
 	int		i;
+	int		count;
 
-	va_start(tab.args, format);
-	tab.tl = 0;
+	va_start(args, format);
 	i = 0;
+	count = 0;
 	while (format[i])
 	{
-		if (format[i] == '%')
+		if (format[i] == '%' && format[i + 1])
 		{
-			i++;
-			if (!format[i])
-				break ;
-			ft_parse_specifier(&tab, format[i]);
+			count += ft_handle_format(format[++i], args);
 		}
 		else
-			tab.tl += write(1, &format[i], 1);
+			count += ft_putchar(format[i]);
 		i++;
 	}
-	va_end(tab.args);
-	return (tab.tl);
+	va_end(args);
+	return (count);
 }

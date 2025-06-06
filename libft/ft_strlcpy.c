@@ -3,32 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yufli <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: yufli <yufli@student.42barcelona.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/27 17:26:18 by yufli             #+#    #+#             */
-/*   Updated: 2025/01/02 19:14:37 by yufli            ###   ########.fr       */
+/*   Created: 2025/06/04 00:38:26 by yufli             #+#    #+#             */
+/*   Updated: 2025/06/04 00:38:34 by yufli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "libft.h"
 
-int	ft_strlcpy(char *dest, const char *src, unsigned int size)
+unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
 {
 	unsigned int	i;
 	unsigned int	len;
 
+	i = 0;
 	len = 0;
 	while (src[len] != '\0')
 		len++;
-	if (size == 0)
-		return (len);
-	i = 0;
-	while (src[i] != '\0' && i < size - 1)
+	if (size != 0)
 	{
-		dest[i] = src[i];
-		i++;
+		while (src[i] != '\0' && i < size - 1)
+		{
+			dest[i] = src[i];
+			i++;
+		}
+		dest[i] = '\0';
 	}
-	dest[i] = '\0';
 	return (len);
 }

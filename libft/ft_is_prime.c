@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_is_prime.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yufli <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: yufli <yufli@student.42barcelona.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/27 15:43:43 by yufli             #+#    #+#             */
-/*   Updated: 2025/06/04 00:09:25 by yufli            ###   ########.fr       */
+/*   Created: 2025/06/04 01:40:31 by yufli             #+#    #+#             */
+/*   Updated: 2025/06/04 01:44:12 by yufli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dest, const void *src, unsigned int n)
+int	ft_is_prime(int nbr)
 {
-	unsigned int	i;
+	int	i;
 
-	if (dest == src)
-		return (dest);
-	i = 0;
-	while (i < n)
+	if (nbr < 2)
+		return (0);
+	i = 2;
+	while (i <= nbr / 2)
 	{
-		((char *)dest)[i] = ((const char *)src)[i];
+		if (nbr % i == 0)
+			return (0);
 		i++;
 	}
-	return (dest);
+	return (1);
 }

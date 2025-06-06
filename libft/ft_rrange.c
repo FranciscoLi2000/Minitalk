@@ -1,27 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_rrange.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yufli <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: yufli <yufli@student.42barcelona.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/31 18:23:08 by yufli             #+#    #+#             */
-/*   Updated: 2025/06/04 00:37:26 by yufli            ###   ########.fr       */
+/*   Created: 2025/06/04 02:17:31 by yufli             #+#    #+#             */
+/*   Updated: 2025/06/04 02:26:21 by yufli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+int	*ft_rrange(int start, int end)
 {
+	int	*tab;
+	int	len;
 	int	i;
 
-	if (!s || !f)
-		return ;
+	if (start < end)
+		len = end - start + 1;
+	else
+		len = start - end + 1;
+	tab = malloc(len * sizeof(int));
+	if (!tab)
+		return (NULL);
 	i = 0;
-	while (s[i] != '\0')
+	while (i < len)
 	{
-		f(i, &s[i]);
+		if (start < end)
+			tab[i] = end--;
+		else
+			tab[i] = start--;
 		i++;
 	}
+	return (tab);
 }

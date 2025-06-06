@@ -6,11 +6,10 @@
 /*   By: yufli <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 13:54:51 by yufli             #+#    #+#             */
-/*   Updated: 2024/12/30 15:08:41 by yufli            ###   ########.fr       */
+/*   Updated: 2025/06/04 00:09:05 by yufli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "libft.h"
 
 int	ft_memcmp(const void *str1, const void *str2, unsigned int n)

@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yufli <yufli@student.42barcelona.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/15 16:04:12 by yufli             #+#    #+#             */
-/*   Updated: 2025/05/18 23:53:10 by yufli            ###   ########.fr       */
+/*   Created: 2025/06/06 20:25:25 by yufli             #+#    #+#             */
+/*   Updated: 2025/06/06 22:34:46 by yufli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-# include <signal.h>
-# include <unistd.h>
-# include <stdlib.h>
+# include <stdarg.h>
 # include "libft.h"
-# include "ft_printf.h"
-# include "get_next_line.h"
+# include <unistd.h>
+# include <stddef.h>
 
-typedef struct s_server
-{
-	char	current_char;
-	int		bit_count;
-}	t_server;
-void	send_bit(int bit, pid_t server_pid);
-void	send_char(char c, pid_t server_pid);
-void	sig_handler(int sig, siginfo_t *info, void *context);
-void	setup_signal(void);
-void	sig_acknowledge(int sig);
+int	ft_printf(const char *format, ...);
+int	ft_handle_format(char type, va_list args);
+int	ft_putchar(char c);
+int	ft_putstr(char *s);
+int	ft_putnbr(int n);
+int	ft_put_unsigned(unsigned int n);
+int	ft_put_hex(unsigned int n, int upper);
+int	ft_putptr(unsigned long ptr);
+int	ft_putptr_hex(unsigned long n);
 
 #endif

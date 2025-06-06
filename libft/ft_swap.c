@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_str.c                                        :+:      :+:    :+:   */
+/*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yufli <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: yufli <yufli@student.42barcelona.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 17:25:00 by yufli             #+#    #+#             */
-/*   Updated: 2025/05/18 23:36:50 by yufli            ###   ########.fr       */
+/*   Created: 2025/06/04 00:44:53 by yufli             #+#    #+#             */
+/*   Updated: 2025/06/04 00:45:32 by yufli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-
-void	print_str(t_print *tab)
+void	ft_swap(int *a, int *b)
 {
-	char	*str;
+	int	tmp;
 
-	str = va_arg(tab->args, char *);
-	if (!str)
-		str = "(null)";
-	tab->tl += write(1, str, ft_strlen(str));
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }

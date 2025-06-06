@@ -3,40 +3,82 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yufli <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: yufli <yufli@student.42barcelona.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/29 15:37:03 by yufli             #+#    #+#             */
-/*   Updated: 2024/12/31 19:46:18 by yufli            ###   ########.fr       */
+/*   Created: 2025/06/04 00:37:36 by yufli             #+#    #+#             */
+/*   Updated: 2025/06/06 18:42:44 by yufli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
 #include "libft.h"
+
+/*
+static int	ft_strs_len(int size, char **strs, char *sep)
+{
+	int	len;
+	int	i;
+
+	len = 0;
+	i = 0;
+	while (i < size)
+		len += ft_strlen(strs[i++]);
+	len += (size - 1) * ft_strlen(sep);
+	return (len);
+}
+
+static char	*ft_strcpy_and_advance(char *dest, char *src)
+{
+	while (*src)
+		*dest++ = *src++;
+	return (dest);
+}
+
+char	*ft_strjoin(int size, char **strs, char *sep)
+{
+	char	*joined;
+	char	*tmp;
+	int		i;
+
+	if (size == 0)
+		return (ft_strdup(""));
+	joined = (char *)malloc(ft_strs_len(size, strs, sep) + 1);
+	if (!joined)
+		return (NULL);
+	tmp = joined;
+	i = 0;
+	while (i < size)
+	{
+		tmp = ft_strcpy_and_advance(tmp, strs[i]);
+		if (i++ < size - 1)
+			tmp = ft_strcpy_and_advance(tmp, sep);
+	}
+	*tmp = '\0';
+	return (joined);
+}
+*/
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*str;
-	int		s1_len;
-	int		s2_len;
-	int		i;
+	size_t	i;
+	size_t	j;
+	size_t	len1;
+	size_t	len2;
+	char	*res;
 
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
-	str = malloc((s1_len + s2_len + 1) * sizeof(char));
-	if (str == NULL)
-		return (NULL);
+	len1 = ft_strlen((char *)s1);
+	len2 = ft_strlen((char *)s2);
+	res = malloc(len1 + len2 + 1);
 	i = 0;
-	while (i < s1_len + s2_len)
+	j = 0;
+	if (!res)
+		return (NULL);
+	while (s1 && s1[i])
 	{
-		if (i < s1_len)
-			str[i] = s1[i];
-		else
-			str[i] = s2[i - s1_len];
+		res[i] = s1[i];
 		i++;
 	}
-	str[i] = '\0';
-	return (str);
+	while (s2 && s2[j])
+		res[i++] = s2[j++];
+	res[i] = '\0';
+	return (res);
 }

@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   is_power_of_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yufli <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: yufli <yufli@student.42barcelona.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/27 15:43:43 by yufli             #+#    #+#             */
-/*   Updated: 2025/06/04 00:09:25 by yufli            ###   ########.fr       */
+/*   Created: 2025/06/04 01:10:26 by yufli             #+#    #+#             */
+/*   Updated: 2025/06/04 01:12:52 by yufli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dest, const void *src, unsigned int n)
+int	is_power_of_2(unsigned int n)
 {
 	unsigned int	i;
 
-	if (dest == src)
-		return (dest);
-	i = 0;
-	while (i < n)
+	i = 1;
+	while (i <= n)
 	{
-		((char *)dest)[i] = ((const char *)src)[i];
-		i++;
+		if (i == n)
+			return (1);
+		i *= 2;
 	}
-	return (dest);
+	return (0);
 }

@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   max.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yufli <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: yufli <yufli@student.42barcelona.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/27 15:43:43 by yufli             #+#    #+#             */
-/*   Updated: 2025/06/04 00:09:25 by yufli            ###   ########.fr       */
+/*   Created: 2025/06/04 01:13:26 by yufli             #+#    #+#             */
+/*   Updated: 2025/06/04 03:02:59 by yufli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dest, const void *src, unsigned int n)
+int	max(int *tab, unsigned int len)
 {
 	unsigned int	i;
+	int				max;
 
-	if (dest == src)
-		return (dest);
-	i = 0;
-	while (i < n)
+	if (len == 0)
+		return (0);
+	max = tab[0];
+	i = 1;
+	while (i < len)
 	{
-		((char *)dest)[i] = ((const char *)src)[i];
+		if (tab[i] > max)
+			max = tab[i];
 		i++;
 	}
-	return (dest);
+	return (max);
 }
