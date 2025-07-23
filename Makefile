@@ -1,64 +1,49 @@
-# ========= CONFIG ============
-NAME_SERVER    = server
-NAME_CLIENT    = client
+# **************************************************************************** #
+#                              MINITALK Makefile                               #
+# **************************************************************************** #
 
-CC             = cc
-CFLAGS         = -Wall -Wextra -Werror
-INCDIRS        = -Iincludes -Ilibft
+NAME_SERVER	= server
+NAME_CLIENT	= client
 
-SRCDIR         = srcs
-BONUSDIR       = srcs_bonus
-OBJDIR         = objs
+# -----------------------------------------------------------------------------
 
-LIBFTDIR       = libft
-LIBFT          = $(LIBFTDIR)/libft.a
+SRCS_DIR	= srcs/
+LIBFT_DIR	= libft/
+INC_DIR		= includes/
 
-SRC_SERVER     = $(wildcard $(SRCDIR)/server*.c)
-SRC_CLIENT     = $(wildcard $(BONUSDIR)/client*.c)
+SRCS_SERVER	= $(SRCS_DIR)server.c $(SRCS_DIR)server_utils.c
+SRCS_CLIENT	= $(SRCS_DIR)client.c $(SRCS_DIR)client_utils.c
 
-OBJ_SERVER     = $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRC_SERVER))
-OBJ_CLIENT     = $(patsubst $(BONUSDIR)/%.c, $(OBJDIR)/%.o, $(SRC_CLIENT))
+OBJS_SERVER	= $(SRCS_SERVER:.c=.o)
+OBJS_CLIENT	= $(SRCS_CLIENT:.c=.o)
 
-# ========= RULES =============
+CC			= cc
+CFLAGS			= -Wall -Wextra -Werror -I$(INC_DIR) -I$(LIBFT_DIR)
+
+# -----------------------------------------------------------------------------
 
 all: $(NAME_SERVER) $(NAME_CLIENT)
 
-$(NAME_SERVER): $(LIBFT) $(OBJ_SERVER)
-	$(CC) $(CFLAGS) $(INCDIRS) $(OBJ_SERVER) $(LIBFT) -o $@
+$(NAME_SERVER): $(OBJS_SERVER)
+	@$(MAKE) -C $(LIBFT_DIR)
+	$(CC) $(CFLAGS) $^ -L$(LIBFT_DIR) -lft -o $@
 
-$(NAME_CLIENT): $(LIBFT) $(OBJ_CLIENT)
-	$(CC) $(CFLAGS) $(INCDIRS) $(OBJ_CLIENT) $(LIBFT) -o $@
+$(NAME_CLIENT): $(OBJS_CLIENT)
+	@$(MAKE) -C $(LIBFT_DIR)
+	$(CC) $(CFLAGS) $^ -L$(LIBFT_DIR) -lft -o $@
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
-	@mkdir -p $(OBJDIR)
-	$(CC) $(CFLAGS) $(INCDIRS) -c $< -o $@
+# -----------------------------------------------------------------------------
 
-$(OBJDIR)/%.o: $(BONUSDIR)/%.c
-	@mkdir -p $(OBJDIR)
-	$(CC) $(CFLAGS) $(INCDIRS) -c $< -o $@
-
-$(LIBFT):
-	$(MAKE) -C $(LIBFTDIR)
-
-# ========= CLEANING ==========
 clean:
-	$(MAKE) clean -C $(LIBFTDIR)
-	rm -rf $(OBJDIR)
+	@$(MAKE) -C $(LIBFT_DIR) clean
+	@rm -f $(OBJS_SERVER) $(OBJS_CLIENT)
 
 fclean: clean
-	$(MAKE) fclean -C $(LIBFTDIR)
-	rm -f $(NAME_SERVER) $(NAME_CLIENT)
+	@$(MAKE) -C $(LIBFT_DIR) fclean
+	@rm -f $(NAME_SERVER) $(NAME_CLIENT)
 
 re: fclean all
 
-# ========= BONUS 支持（可选）=======
-bonus:
-	$(MAKE) NAME_SERVER=server_bonus NAME_CLIENT=client_bonus \
-		SRCDIR=srcs_bonus all
+bonus: all
 
-# ========= DEBUG 编译（调试用） ======
-debug:
-	$(MAKE) CFLAGS="-g3 -fsanitize=address -Wall -Wextra -Werror" re
-
-# ========= PHONY RULES =========
-.PHONY: all clean fclean re bonus debug
+.PHONY: all clean fclean re bonus
