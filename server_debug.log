@@ -1,0 +1,16 @@
+nohup: ignoring input
+Server PID: 1364
+Server is ready to receive messages with acknowledgments...
+[DEBUG] Signal handlers registered successfully
+[DEBUG] Received signal: SIGUSR1
+[DEBUG] Client PID set to: 1366
+[DEBUG] Set bit 0 to 1
+[DEBUG] Bit position: 1
+[DEBUG] Received signal: SIGUSR1
+[DEBUG] Client PID set to: 1367
+[DEBUG] Set bit 1 to 1
+[DEBUG] Bit position: 2
+[DEBUG] Received signal: SIGUSR1
+[DEBUG] Client PID set to: 1325
+[DEBUG] Set bit 2 to 1
+[DEBUG] Bit position: 3
